@@ -1,0 +1,162 @@
+{% extends "layout/base.html" %}
+
+{% block title %} Crime-mapper FIR {% endblock %}
+
+<!-- Specific Page CSS goes HERE  -->
+{% block stylesheets %}
+<style>
+.reg-form{
+    border:2px solid #DFBE9D;
+    width:50%;
+    margin:0 auto;
+    margin-top:136px;
+    padding:20px;
+    color:#DFBE9D;
+}
+</style>
+{% endblock stylesheets %}
+
+{% block body_class %} landing-page {% endblock body_class %}
+
+{% block content %}
+
+<main>
+
+<section class="register-form">
+    <div class="container form">
+    <div class="row reg-form">
+    <h1 style=" text-align:center;font-weight:800;">File a FIR<i class="fas fa-user"></i></h1>
+       
+        <form id="register-form"  class="was-validated" style="margin-bottom:45px;">
+            <label for="Education" class="form-label">Team type</label>
+            <select class="form-select" id="team-type" required>
+                <option value="students">Students</option>
+                <option value="faculty">Faculty</option>
+                <option value="entrepreneurs">Entrepreneurs</option>
+            </select><br>
+            <label for="state" class="form-label">Total team members</label>
+            <select class="form-select" id="members" required>
+                <option value="1">1</option>
+                <option value="2">2</option>
+                <option value="3">3</option>
+                <option value="4">4</option>
+            </select>
+            <div class="mb-3">
+                <label for="Name" class="form-label">Team Name</label>
+                <input type="text" class="form-control" id="tname" required />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+                <label for="Name" class="form-label">Team Leader's Name</label>
+                <input type="text" class="form-control" id="tlname" required />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback"></div>
+            </div>
+            <div class="mb-3">
+              <label for="Email" class="form-label">Team Leader's Email address</label>
+              <input type="email" class="form-control" id="tlemail" pattern="[a-z0-9._]+@[a-z]+\.[a-z]{2,3}" required />
+              <div class="valid-feedback"></div>
+              <div class="invalid-feedback">Please make sure your email address is non empty and have an '@' and '.'</div>
+            </div>
+            <div class="mb-3">
+                <label for="phone" class="form-label">Team Leader's Phone number</label>
+                <input type="phone" pattern="[6789][0-9]{9}" class="form-control" id="tlphone" required />
+                <div class="valid-feedback"></div>
+                <div class="invalid-feedback">Please make sure you have entered a valid 10 digit phone number</div>
+            </div>
+            <div class="mb-3">
+                <label for="organization" class="form-label">Organization (Please provide full name) <br>(You will require to show your ID proof on reaching the campus)</label>
+                <input type="text" class="form-control" id="organization" required />
+            </div>
+            <label for="ps" class="form-label">Please select your problem statement</label>
+            <select class="form-select" id="problem-statement" required>
+                <option value="1">PS-1 Smart Notice Board of smart Info display system</option>
+                <option value="2">PS-2 Digital Automatic attendance system for education campus</option>
+                <option value="3">PS-3 Automatic gardening system in college</option>
+                <option value="4">PS-4 Automatic event detection in CCTV surveillance</option>
+                <option value="5">PS-5 Identification of crime prone areas</option>
+                <option value="6">PS-6 Social Media Intelligence on individual that are suspect in crime</option>
+                <option value="7">PS-7 VOIP call tracking and tracing</option>
+                <option value="8">PS-8 Dark Web Investigations</option>
+                <option value="9">PS-9 Crypto Crimes</option>
+                <option value="10">PS-10 Cyber enabled trafficing</option>
+                <option value="11">PS-11 Violent, gambling based games addicting young ones</option>
+                <option value="12">PS-12 AI based comparison of Well Hydrographs generated using high frequency automatic water level recorders for its classification and utilisation.</option>
+                <option value="13">PS-13 Raise classroom behavior issue in real time</option>
+                <option value="14">PS-14 Course and University finder</option>
+                <option value="15">PS-15 Virtual Health assistant</option>
+                <option value="16">PS-16 GPS Monitoring for Ambulance</option>
+                <option value="17">PS-17 Problem statement in the field of Banking</option>
+                <option value="18">PS-18 Problem statement in the field of Cyber Security</option>
+                <option value="19">PS-19 Problem statement in the field of Automation</option>
+                <option value="20">PS-20 Problem statement in the field of Environment Sustainability</option>
+                <option value="21">PS-21 Problem statement in the field of Fintech</option>
+                <option value="22">PS-22 Problem statement in the field of Agriculture</option>
+                <option value="23">PS-23 Problem statement in the field of Rural Development</option>
+                <option value="24">PS-24 Problem statement in the field of Food Technology</option>
+                <option value="25">PS-25 Problem statement in the field of Health & Biomedical Devices</option>
+                <option value="26">PS-26 Problem statement in the field of Automobile</option>
+                <option value="27">PS-27 Problem statement in the field of Robotics & Drone</option>
+                <option value="28">PS-28 Problem statement in the field of Gaming and Graphics</option>
+            </select><br>
+            
+            
+            <span style="width:100%;"><button type="submit" class="btn" id="btn-register">Submit</button></span>
+          </form>
+    </div>
+  </div>
+</section>
+<script>
+$(document).on('click', '#btn-register', function(e){
+    e.preventDefault();
+    var form = $('#register-form');
+    let teamType = $('#team-type').val();
+    let members = $('#members').val();
+    let tname = $('#tname').val();
+    let tlname = $('#tlname').val();
+    let tlemail = $('#tlemail').val();
+    let tlphone = $('#tlphone').val();
+    let organization = $('#organization').val();
+    let problemStatement = $('#problem-statement').val();
+    jsondata={
+      "teamType":teamType,
+      "members":members,
+      "tname":tname,
+      "tlname":tlname,
+      "tlemail":tlemail,
+      "tlphone":tlphone,
+      "organization":organization,
+      "problemStatement":problemStatement,
+    }
+    let urll="https://ideathon2022.herokuapp.com/registrations2/"+tname+"/"+members;
+    console.log(urll);
+    // disabled the submit button
+    $("#btn-register").prop("disabled", true);
+    $.ajax({
+      type: "POST",
+      data: jsondata,
+      url:"/add-user",
+      dataType: "json",
+        complete: function(resp){
+          $("#btn-register").prop("disabled", false); 
+          if(resp.responseText=='true'){
+            if(members==1){
+              alert("Team details saved. Thankyou!");
+            }
+            else{
+              alert("Team details saved, Please proceed to add further team members!");
+              window.location.href = urll;}
+            }
+          
+          else{
+            alert(resp.responseText)
+          }
+          // enabled the submit button
+        }
+      });
+});
+</script>
+</main>
+
+{% endblock content %}

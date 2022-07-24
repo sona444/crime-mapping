@@ -1,0 +1,14 @@
+.navbar-collapse{
+    justify-content: flex-end;
+}
+.foot-i{
+  padding: 20px;
+  padding-top:15px;
+  padding-left:16px;
+  font-size: 30px;
+  width: 59px;
+  height:57px;
+  text-align: center;
+  text-decoration: none;
+  margin: 5px 2px;
+}
